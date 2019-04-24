@@ -1,2 +1,2 @@
 [webserver]
-hostname_or_ip_address	ansible_ssh_user=root ansible_ssh_pass=rootPassword ansible_python_interpreter=python3
+hostname	ansible_ssh_user=root ansible_ssh_pass=rootPassword ansible_python_interpreter=python3

@@ -1,6 +1,6 @@
 # ansible-lamp 
 
-Ansible playbook to deploy a LAMP stack on Ubuntu hosts. Tested with the following configurations :
+Ansible playbook to deploy a LAMP stack on Ubuntu hosts. Tested with the following configurations:
 
 ```
 $ ansible --version
@@ -19,9 +19,9 @@ server1.example.org     ansible_ssh_user=root ansible_ssh_pass=rootPassword ansi
 ```
   * Edit **host_vars/server1.example.org.yml** with your own values.
   * Run ```ansible-playbook -i hosts lamp-http.yml``` for a web server running with an http access.
-  * Run ```ansible-playbook -i hosts lamp-https.yml``` for a web server running with an https access.
+  * Run ```ansible-playbook -i hosts lamp-https.yml``` for a web server running with an https access, certificat generated with Letsencrypt.
 
-MySQL passwords generated with ```select password('password');```.
+MySQL passwords generated with ```select password('password');```
 
   * Default password for root account: **rootPassword**
   * Default password for user account: **userPassword**
