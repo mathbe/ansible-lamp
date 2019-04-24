@@ -1,6 +1,6 @@
 # ansible-lamp 
 
-Ansible playbook to deploy a LAMP stack on Ubuntu hosts. Tested with the following configurations:
+Ansible playbook to deploy a LAMP stack on Ubuntu hosts. Tested with the following environment
 
 ```
 $ ansible --version
@@ -12,7 +12,7 @@ ansible 2.7.10
 
 ## Setup
 
-  * Configure hosts file, something like
+  * Configure hosts file. Something like
 ```
 [webserver]
 server1.example.org     ansible_ssh_user=root ansible_ssh_pass=rootPassword ansible_python_interpreter=python3
