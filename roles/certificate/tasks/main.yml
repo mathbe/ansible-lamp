@@ -28,7 +28,7 @@
   apache2_module:
     name: ssl
     state: present
-  notify: Reload Apache
+  notify: Restart Apache
 
 - name: "Add http/https redirection for {{ servername }}"
   template:
