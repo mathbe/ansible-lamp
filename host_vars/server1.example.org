@@ -1,0 +1,8 @@
+---
+servername: demo.example.org 
+domain_admin_mail: webmaster@example.org
+db_name: demo
+db_user: user
+db_user_password: '*4B1B6482FB4BD13ED4E346D1F220FB1820073E6F'
+db_root_password: '*9BC01A49104D6960C8C288548AD36884E0B580D8'
+...

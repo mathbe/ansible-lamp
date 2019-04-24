@@ -1,0 +1,19 @@
+---
+- hosts: webserver
+
+  pre_tasks:
+    - name: "Update cache"
+      apt: update_cache=yes
+    - name: "System upgrade"
+      apt: upgrade=dist
+
+  roles:
+    - webserver
+    - db
+    - code
+    - firewall
+    - certificate
+
+  vars:
+    allowed_ports: ['http', 'https']
+...

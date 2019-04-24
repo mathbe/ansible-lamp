@@ -1,0 +1,42 @@
+---
+- name: "Install certbot packages"
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - certbot
+    - python-certbot-apache
+
+- name: "Generate certificate for {{ servername }}"
+  command: certbot certonly --apache --non-interactive --agree-tos --email {{ domain_admin_mail }} --domains {{ servername }}
+  ignore_errors: yes
+  register: certbot_result
+
+- name: "Check if certificate exists for {{ servername }}"
+  stat:
+    path: /etc/letsencrypt/live/{{ servername }}/fullchain.pem
+  register: certificate
+
+- debug:
+    msg: "certbot_result: {{ certbot_result.rc }}"
+
+- debug:
+    msg: "certificate: {{ certificate }}"
+
+- name: "Enable apache ssl module"
+  apache2_module:
+    name: ssl
+    state: present
+  notify: Reload Apache
+
+- name: "Add http/https redirection for {{ servername }}"
+  template:
+    src: vhost.conf.j2
+    dest: /etc/apache2/sites-available/{{ servername }}.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: certbot_result.rc == 0 and certificate.stat.exists
+  notify: Restart Apache
+...

@@ -1,0 +1,9 @@
+---
+- name: "Copy code to /opt/websites/{{ servername }}"
+  template:
+    src: index.php.j2
+    dest: /opt/websites/{{ servername }}/index.php
+    owner: root
+    group: root
+    mode: 0644
+...

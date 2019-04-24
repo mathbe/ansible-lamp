@@ -1,0 +1,18 @@
+# File managed by Ansible
+# Do not edit !
+
+<Virtualhost *:80>
+	ServerName {{ servername }}
+
+	DocumentRoot /opt/websites/{{ servername }}
+	
+	ErrorLog /var/log/apache2/{{ servername }}.error.log
+        CustomLog /var/log/apache2/{{ servername }}.acces.log combined
+
+	<Directory /opt/websites/{{ servername }}>
+		Options -Indexes -Includes -ExecCGI +FollowSymLinks +MultiViews
+		Require all granted
+	</Directory>
+</Virtualhost>
+
+# EOF

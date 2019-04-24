@@ -1,0 +1,31 @@
+# File managed by Ansible
+# Do not edit !
+
+<Virtualhost *:80>
+	ServerName {{ servername }}
+
+	Redirect permanent / https://{{ servername }}
+	
+	ErrorLog /var/log/apache2/{{ servername }}.error.log
+        CustomLog /var/log/apache2/{{ servername }}.acces.log combined
+</Virtualhost>
+
+<Virtualhost *:443>
+	ServerName {{ servername }} 
+
+	DocumentRoot /opt/websites/{{ servername }}
+
+	Include /etc/letsencrypt/options-ssl-apache.conf
+	SSLCertificateFile /etc/letsencrypt/live/{{ servername }}/fullchain.pem
+	SSLCertificateKeyFile /etc/letsencrypt/live/{{ servername }}/privkey.pem
+	
+	ErrorLog /var/log/apache2/{{ servername }}.error.log
+        CustomLog /var/log/apache2/{{ servername }}.acces.log combined
+
+	<Directory /opt/websites/{{ servername }}>
+		Options -Indexes -Includes -ExecCGI +FollowSymLinks +MultiViews 
+		Require all granted
+	</Directory>
+</Virtualhost>
+
+# EOF

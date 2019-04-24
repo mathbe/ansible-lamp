@@ -1,0 +1,15 @@
+---
+- name: Install ferm
+  apt:
+    name: ferm
+    state: present
+
+- name: Deploy ferm configuration
+  template:
+    src: ferm.conf.j2
+    dest: /etc/ferm/ferm.conf
+    mode: 0640
+    owner: root
+    group: root
+  notify: Restart ferm
+...

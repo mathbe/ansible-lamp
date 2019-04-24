@@ -1,0 +1,32 @@
+---
+- name: "Install DB packages"
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - mysql-server
+    - python3-pymysql
+
+- name: "Create database {{ db_name }}"
+  mysql_db:
+    config_file: /etc/mysql/debian.cnf
+    name: "{{ db_name }}"
+    state: present
+
+- name: "Create user {{ db_user }}"
+  mysql_user:
+    config_file: /etc/mysql/debian.cnf
+    name: "{{ db_user }}"
+    password: "{{ db_user_password }}"
+    encrypted: yes
+    priv: '{{ db_name }}.*:ALL'
+    state: present
+
+- name: "Change root password"
+  mysql_user:
+    config_file: /etc/mysql/debian.cnf
+    name: root
+    password: "{{ db_root_password }}"
+    encrypted: yes
+...

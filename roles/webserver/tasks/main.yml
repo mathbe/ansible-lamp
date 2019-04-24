@@ -1,0 +1,52 @@
+---
+- name: "Install web server packages"
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - apache2
+    - php
+    - libapache2-mod-php
+
+- name: "Remove default configuration"
+  file:
+    path: /etc/apache2/sites-enabled/{{ item }}
+    state: absent
+  with_items:
+    - 000-default.conf
+    - default-ssl.conf
+
+- name: "Create /opt/websites/{{ servername }}"
+  file:
+    path: /opt/websites/{{ servername }}
+    state: directory
+
+- name: "Setup vhost for {{ servername }}"
+  template:
+    src: vhost.conf.j2
+    dest: /etc/apache2/sites-available/{{ servername }}.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Apache
+
+- name: "Check if virtualhost exists for {{ servername }}"
+  stat:
+    path: /etc/apache2/sites-enabled/{{ servername }}.conf
+  register: vhost
+
+- name: "Enable {{ servername }}.conf"
+  command: a2ensite {{ servername }}.conf
+  when: not vhost.stat.exists
+  notify: Restart Apache
+
+- name: "Copy security.conf"
+  copy:
+    src: security.conf
+    dest: /etc/apache2/conf-available/security.conf
+    owner: root
+    group: root
+    mode: 0640
+  notify: Restart Apache
+...
