@@ -21,6 +21,13 @@ server1.example.org     ansible_ssh_user=root ansible_ssh_pass=rootPassword ansi
   * Run ```ansible-playbook -i hosts lamp-http.yml``` for a web server running with an http access.
   * Run ```ansible-playbook -i hosts lamp-https.yml``` for a web server running with an https access.
 
+MySQL passwords generated with ```select password('password');```.
+
+  * Default password for root account: **rootPassword**
+  * Default password for user account: **userPassword**
+
+
 ## References
 
-  * [http://ferm.foo-projects.org/](http://ferm.foo-projects.org/)
+  * http://ferm.foo-projects.org/
+  * https://dev.mysql.com/doc/refman/5.6/en/password-hashing.html
