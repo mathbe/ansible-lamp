@@ -11,8 +11,8 @@
     - webserver
     - db
     - code
-    - firewall
     - certificate
+    - firewall
 
   vars:
     allowed_ports: ['http', 'https']
