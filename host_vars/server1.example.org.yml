@@ -1,6 +1,6 @@
 ---
 servername: demo.example.org 
-domain_admin_mail: webmaster@example.org
+domain_admin_mail: contact@example.org
 db_name: demo
 db_user: user
 db_user_password: '*4B1B6482FB4BD13ED4E346D1F220FB1820073E6F'
