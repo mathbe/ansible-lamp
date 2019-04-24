@@ -28,6 +28,7 @@
   apache2_module:
     name: ssl
     state: present
+  when: certbot_result.rc == 0 and certificate.stat.exists
   notify: Restart Apache
 
 - name: "Add http/https redirection for {{ servername }}"
